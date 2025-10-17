@@ -1,0 +1,113 @@
+// Prisma schema for ShopSmart
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  username     String    @unique
+  email        String    @unique
+  passwordHash String    @map("password_hash")
+  role         String    @default("user")
+  displayName  String?   @map("display_name")
+  secretNote   String?   @map("secret_note")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  orders       Order[]
+  reviews      Review[]
+  wishlist     WishlistItem[]
+
+  @@map("user")
+}
+
+model Product {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String
+  priceCents  Int       @map("price_cents")
+  imageUrl    String?   @map("image_url")
+  categoryId  Int?      @map("category_id")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  reviews     Review[]
+  orderItems  OrderItem[]
+  wishlist    WishlistItem[]
+
+  @@map("product")
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  productId Int      @map("product_id")
+  rating    Int
+  text      String
+  createdAt DateTime @default(now()) @map("created_at")
+  user      User     @relation(fields: [userId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+
+  @@map("review")
+}
+
+model Order {
+  id         Int         @id @default(autoincrement())
+  userId     Int         @map("user_id")
+  status     String
+  totalCents Int         @map("total_cents")
+  giftNote   String?     @map("gift_note")
+  createdAt  DateTime    @default(now()) @map("created_at")
+  items      OrderItem[]
+  user       User        @relation(fields: [userId], references: [id])
+
+  @@map("order")
+}
+
+model OrderItem {
+  id         Int     @id @default(autoincrement())
+  orderId    Int     @map("order_id")
+  productId  Int     @map("product_id")
+  qty        Int
+  priceCents Int     @map("price_cents")
+  order      Order   @relation(fields: [orderId], references: [id])
+  product    Product @relation(fields: [productId], references: [id])
+
+  @@map("order_item")
+}
+
+model WishlistItem {
+  id        Int     @id @default(autoincrement())
+  userId    Int     @map("user_id")
+  productId Int     @map("product_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  user      User    @relation(fields: [userId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@map("wishlist_item")
+}
+
+model AdminSecret {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("admin_secret")
+}
+
+model RememberToken {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  token     String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  expiresAt DateTime @map("expires_at")
+
+  @@map("remember_token")
+}
+
+
+
+

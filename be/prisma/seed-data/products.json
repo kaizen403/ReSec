@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Aurora Leather Backpack",
+    "description": "Handcrafted full‑grain leather backpack with padded laptop sleeve and interior pockets.",
+    "priceCents": 13900,
+    "categoryId": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1612810806695-30ba47d1c0e3?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    "name": "Nimbus Noise-Cancelling Headphones",
+    "description": "Wireless over‑ear headphones featuring adaptive noise cancelling and 30‑hour battery life.",
+    "priceCents": 18900,
+    "categoryId": 4,
+    "imageUrl": "https://images.unsplash.com/photo-1516110833967-5781d3fee343?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    "name": "Evergreen Ceramic Mug Set",
+    "description": "Set of four dishwasher‑safe stoneware mugs with reactive glaze finish.",
+    "priceCents": 4200,
+    "categoryId": 5,
+    "imageUrl": "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    "name": "Lumos Smart Table Lamp",
+    "description": "Dimmable smart lamp with warm-to-cool light and voice assistant integration.",
+    "priceCents": 8900,
+    "categoryId": 4,
+    "imageUrl": "https://images.unsplash.com/photo-1505691723518-36a5ac3be353?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    "name": "Solstice Fitness Watch",
+    "description": "Water-resistant fitness tracker with heart rate monitoring and GPS.",
+    "priceCents": 15900,
+    "categoryId": 2,
+    "imageUrl": "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    "name": "Cascade Insulated Bottle",
+    "description": "18oz double-wall stainless steel bottle keeps drinks hot for 12 hours or cold for 24.",
+    "priceCents": 3200,
+    "categoryId": 5,
+    "imageUrl": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    "name": "Saffron Wool Throw Blanket",
+    "description": "Soft merino wool throw with fringed edges in a rich saffron hue.",
+    "priceCents": 11800,
+    "categoryId": 6,
+    "imageUrl": "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    "name": "Vertex Mechanical Keyboard",
+    "description": "Hot-swappable mechanical keyboard with programmable RGB lighting and tactile switches.",
+    "priceCents": 9900,
+    "categoryId": 4,
+    "imageUrl": "https://images.unsplash.com/photo-1517436073-7b60f1043c39?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    "name": "Marina Scented Candle Trio",
+    "description": "Set of three soy wax candles inspired by coastal botanicals and sea breeze.",
+    "priceCents": 3600,
+    "categoryId": 5,
+    "imageUrl": "https://images.unsplash.com/photo-1503863937795-62954a3c0f05?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    "name": "Summit Trail Running Shoes",
+    "description": "Lightweight trail runners with breathable mesh upper and aggressive outsole.",
+    "priceCents": 12400,
+    "categoryId": 3,
+    "imageUrl": "https://images.unsplash.com/photo-1520367745676-234fdd6e1f86?auto=format&fit=crop&w=700&q=80"
+  }
+]

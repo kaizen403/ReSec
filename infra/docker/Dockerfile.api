@@ -1,0 +1,38 @@
+FROM node:20-bookworm
+
+# Install system dependencies for native modules
+RUN apt-get update && apt-get install -y \
+    openssl \
+    ca-certificates \
+    python3 \
+    make \
+    g++ \
+    build-essential \
+    libxml2-dev \
+    libxslt1-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+COPY prisma ./prisma/
+
+# Install dependencies
+RUN npm install
+
+# Copy application code
+COPY . .
+
+# Generate Prisma client
+RUN npx prisma generate
+
+# Expose port
+EXPOSE 4000
+
+# Start command (will be overridden in docker-compose for dev)
+CMD ["npm", "start"]
+
+
+
