@@ -32,6 +32,14 @@ echo -e "${YELLOW}📦 Stopping existing containers...${NC}"
 docker-compose down 2>/dev/null || true
 echo ""
 
+# Proactively rebuild images so apt mirrors use HTTPS before starting
+echo -e "${YELLOW}🔧 Building Docker images (forcing HTTPS mirrors)...${NC}"
+if ! docker-compose build api; then
+    echo -e "${RED}✗ Image build failed. Ensure outbound HTTPS (443) access to deb.debian.org is allowed and rerun.${NC}"
+    exit 1
+fi
+echo ""
+
 # Start services
 echo -e "${YELLOW}🚀 Starting all services...${NC}"
 docker-compose up -d
@@ -136,6 +144,5 @@ echo -e "${YELLOW}⚠️  WARNING: This application is INTENTIONALLY VULNERABLE$
 echo -e "${YELLOW}   DO NOT expose to the internet or use in production!${NC}"
 echo ""
 echo -e "${GREEN}🎉 Happy Hacking! 🔒${NC}"
-
 
 

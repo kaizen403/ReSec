@@ -41,6 +41,8 @@ services:
       context: ./be
       dockerfile: ../infra/docker/Dockerfile.api
       network: host
+      args:
+        APT_USE_HTTPS: "true"
     container_name: shopsmart-api
     environment:
       DATABASE_URL: postgresql://shop:shop@db:5432/shop
@@ -123,6 +125,23 @@ services:
     depends_on:
       - web
       - api
+    networks:
+      - shopsmart-network
+
+  # Decoy FTP and idle listeners
+  decoy-ftp:
+    build:
+      context: ./infra/decoy
+    container_name: shopsmart-decoy
+    environment:
+      FAKE_FTP_PORT: "21"
+      DECOY_PORTS: "21,2121,2323,5001,64000"
+    ports:
+      - "21:21"
+      - "2121:2121"
+      - "2323:2323"
+      - "5001:5001"
+      - "64000:64000"
     networks:
       - shopsmart-network
 
