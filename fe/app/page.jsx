@@ -43,8 +43,8 @@ const FALLBACK_FEATURED = [
 async function getFeaturedProducts() {
   try {
     const res = await fetch('https://fakestoreapi.com/products?limit=8', {
+      // Use ISR-style caching; avoid conflicting cache options
       next: { revalidate: 300 },
-      cache: 'no-store',
     });
     if (res.ok) {
       const data = await res.json();

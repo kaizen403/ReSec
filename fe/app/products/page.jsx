@@ -108,8 +108,8 @@ const FALLBACK_PRODUCTS = [
 async function getProducts() {
   try {
     const res = await fetch('https://fakestoreapi.com/products', {
+      // Use ISR-style caching; avoid conflicting cache options
       next: { revalidate: 300 },
-      cache: 'no-store',
     });
     if (!res.ok) {
       throw new Error(`Failed to load products (${res.status})`);
