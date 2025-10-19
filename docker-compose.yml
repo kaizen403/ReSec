@@ -41,8 +41,6 @@ services:
       context: ./be
       dockerfile: ../infra/docker/Dockerfile.api
       network: host
-      args:
-        APT_USE_HTTPS: "true"
     container_name: shopsmart-api
     environment:
       DATABASE_URL: postgresql://shop:shop@db:5432/shop
