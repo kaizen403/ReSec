@@ -1,0 +1,23 @@
+{
+  "name": "shopsmart-workspace",
+  "version": "1.0.0",
+  "description": "ShopSmart - Intentionally vulnerable e-commerce platform for security testing",
+  "private": true,
+  "scripts": {
+    "docker:up": "docker-compose up -d && echo '⏳ Waiting for services to be healthy...' && sleep 5",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "db:seed": "cd be && npm run prisma:push && npm run prisma:seed",
+    "dev:api": "cd be && DATABASE_URL='postgresql://shop:shop@localhost:5432/shop' REDIS_URL='redis://localhost:6379' PORT=4000 FRONTEND_ORIGIN='http://localhost:3000' MASS_ASSIGNMENT_FLAG='PCTFS{mass_assignment_privilege_escalation}' SHOPSMART_FLAG='PCTFS{ssti_invoice_template_injection}' SSTI_EMAIL_FLAG='PCTFS{ssti_email_template_displayname}' VULN_COMPONENT_FLAG='PCTFS{eval_debug_console_rce}' PILLOW_FLAG='PCTFS{pillow_8_1_0_buffer_overflow_memory_leak}' SSRF_FLAG='PCTFS{ssrf_internal_service_reached}' ADMIN_EMAIL='admin@shopsmart.com' ADMIN_PASSWORD='SuperSecretAdminPass123' npm run dev",
+    "dev:fe": "cd fe && NEXT_PUBLIC_API_BASE='http://localhost:4000' npm run dev",
+    "dev": "concurrently -n \"API,FE\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm run dev:api\" \"npm run dev:fe\"",
+    "start": "npm run docker:up && npm run db:seed && npm run dev",
+    "stop": "npm run docker:down && pkill -f 'nodemon' && pkill -f 'next dev'",
+    "setup": "cd be && npm install && cd ../fe && npm install && cd .. && npm install",
+    "clean": "npm run docker:down && docker volume rm med-lab_postgres_data 2>/dev/null || true"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
+

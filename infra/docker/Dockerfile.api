@@ -1,17 +1,17 @@
-FROM node:20-bookworm
+FROM node:20-alpine
 
-# Install system dependencies for native modules
-RUN apt-get update && apt-get install -y \
+# Install system dependencies for native modules (bcrypt, prisma, etc)
+RUN apk add --no-cache \
         openssl \
         ca-certificates \
         python3 \
         make \
         g++ \
-        build-essential \
+        gcc \
+        libc-dev \
         libxml2-dev \
-        libxslt1-dev \
-        pkg-config \
-    && rm -rf /var/lib/apt/lists/*
+        libxslt-dev \
+        pkgconfig
 
 WORKDIR /app
 
@@ -19,8 +19,10 @@ WORKDIR /app
 COPY package*.json ./
 COPY prisma ./prisma/
 
-# Install dependencies
-RUN npm install
+# Install dependencies with retry and alternative registry
+RUN npm config set registry https://registry.npmmirror.com && \
+    npm install --network-timeout=100000 || \
+    (npm config set registry https://registry.npmjs.org && npm install --network-timeout=100000)
 
 # Copy application code
 COPY . .
