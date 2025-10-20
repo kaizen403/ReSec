@@ -39,6 +39,6 @@ echo ""
 echo "💡 Press Ctrl+C to stop all services"
 echo ""
 
-# Start development servers with concurrently
+# Start development image.pngservers with concurrently
 npm run dev
 

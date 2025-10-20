@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { fetchWithTimeout } from '../../lib/fetchWithTimeout';
 
 const toTitleCase = (value) => {
   if (typeof value !== 'string') return 'General';
@@ -107,9 +108,10 @@ const FALLBACK_PRODUCTS = [
 
 async function getProducts() {
   try {
-    const res = await fetch('https://fakestoreapi.com/products', {
+    const res = await fetchWithTimeout('https://fakestoreapi.com/products', {
       // Use ISR-style caching; avoid conflicting cache options
       next: { revalidate: 300 },
+      timeout: 2500,
     });
     if (!res.ok) {
       throw new Error(`Failed to load products (${res.status})`);
